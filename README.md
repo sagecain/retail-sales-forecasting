@@ -1,82 +1,53 @@
-🛒 Retail Sales Forecasting
+# 🛒 Retail Sales Forecasting (Python)
 
-This project applies time series forecasting to retail sales data (UCI Online Retail dataset). The goal is to model monthly sales trends and predict future demand using SARIMA.
+Forecasting monthly retail revenue using the **UCI Online Retail dataset**.  
+Built with **Python, Pandas, Statsmodels, and SARIMAX** to demonstrate real-world time series modeling.
 
-📊 Dataset
+---
 
-Source: UCI Online Retail Dataset
+## 🔑 Project Highlights
+- Cleaned and aggregated **500k+ transaction records** into monthly sales  
+- Built and tuned **SARIMA models** to capture trend and seasonality  
+- Evaluated performance with **MAE and RMSE**  
+- Delivered **visual forecasts, train/test splits, and diagnostics**  
 
-Filtered to monthly aggregates of sales revenue.
+---
 
-Data prepared in data/Online Retail.xlsx.
+## 📊 Results
 
-⚙️ Workflow
+**Forecast vs Actual**  
+![Forecast](results/monthly_sales.png)
 
-Data Cleaning & Aggregation
+**Train/Test Split**  
+![Train/Test](results/train_test_plot.png)
 
-Converted invoice dates to monthly periods
+**Custom Diagnostics (short sample)**  
+![Diagnostics](results/custom_diagnostics.png)
 
-Removed returns/cancellations
+---
 
-Aggregated by monthly sales
+## 🧰 Tools & Tech
+- Python (Pandas, NumPy, Matplotlib, Statsmodels, Scikit-learn)  
+- Jupyter Notebook  
+- GitHub for version control  
 
-Exploratory Analysis
+---
 
-Monthly sales trend visualization (monthly_sales.png)
+## 🔍 Notes on Diagnostics
+The dataset slice used for modeling contained only **11 months** of sales.  
+Because of this, the full SARIMA diagnostics could not run.  
+A **custom lightweight diagnostic plot** was created instead to visualize:  
+- Residuals over time  
+- Histogram of residuals  
+- Residual autocorrelation (ACF)  
 
-Train/Test Split
+---
 
-80/20 split into training vs. test set
+## 🚀 Next Steps
+- Extend to multi-year or all-country data for richer forecasts  
+- Compare SARIMA with **Prophet or machine learning models**  
+- Deploy as an **interactive dashboard** (Streamlit / Power BI)  
 
-Visualization saved as train_test_plot.png
+---
 
-Modeling (SARIMA)
-
-Candidate SARIMA models fit with statsmodels
-
-Best model selected via lowest AIC
-
-Forecasting
-
-Predictions vs. actual values exported to forecast_vs_actual.csv
-
-📉 Results
-
-Forecasts generally capture the overall sales trend.
-
-Small dataset length limits model complexity.
-
-Output files:
-
-results/monthly_sales.png – historical sales
-
-results/train_test_plot.png – train/test split
-
-results/forecast_vs_actual.csv – numerical results
-
-🔍 Diagnostics
-
-Because the dataset slice used here had only 11 months of sales history, the standard SARIMA diagnostic routine (res.plot_diagnostics) could not be applied — it requires longer time series to validate assumptions.
-
-Instead, a custom lightweight diagnostic visualization was created and saved as:
-
-results/custom_diagnostics.png
-
-
-This diagnostic includes:
-
-Residuals over time (check for patterns)
-
-Residual histogram (check approximate normality)
-
-Residual autocorrelation function (ACF), trimmed to the available data
-
-While limited, these diagnostics still provide a basic check on model fit. For larger datasets (e.g., multiple years or all countries), the full SARIMA diagnostics can be run without modification.
-
-🚀 Next Steps
-
-Extend analysis with longer sales history
-
-Compare SARIMA with Prophet, XGBoost, and LSTM
-
-Deploy forecasts in an interactive dashboard (e.g., Power BI or Streamlit)
+👤 **Author:** Sage Cain (2025)
