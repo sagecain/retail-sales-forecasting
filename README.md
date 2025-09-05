@@ -1,67 +1,82 @@
-# 🛒 Retail Sales Forecasting (Python)
+🛒 Retail Sales Forecasting
 
-This project forecasts **monthly retail revenue** using the [UCI Online Retail dataset](https://archive.ics.uci.edu/dataset/352/online+retail).  
-The goal is to demonstrate time series forecasting skills applied to real-world retail sales data.
+This project applies time series forecasting to retail sales data (UCI Online Retail dataset). The goal is to model monthly sales trends and predict future demand using SARIMA.
 
----
+📊 Dataset
 
-## 📂 Project Structure
-retail-sales-forecasting/
-├── data/ # Raw dataset (not committed)
-├── notebooks/
-│ └── retail_forecasting.ipynb # Jupyter notebook (data cleaning, modeling, results)
-├── results/ # Saved plots and outputs
-│ ├── monthly_sales.png
-│ ├── train_test_plot.png
-│ └── sarimax_diagnostics.png
-└── README.md
+Source: UCI Online Retail Dataset
+
+Filtered to monthly aggregates of sales revenue.
+
+Data prepared in data/Online Retail.xlsx.
+
+⚙️ Workflow
+
+Data Cleaning & Aggregation
+
+Converted invoice dates to monthly periods
+
+Removed returns/cancellations
+
+Aggregated by monthly sales
+
+Exploratory Analysis
+
+Monthly sales trend visualization (monthly_sales.png)
+
+Train/Test Split
+
+80/20 split into training vs. test set
+
+Visualization saved as train_test_plot.png
+
+Modeling (SARIMA)
+
+Candidate SARIMA models fit with statsmodels
+
+Best model selected via lowest AIC
+
+Forecasting
+
+Predictions vs. actual values exported to forecast_vs_actual.csv
+
+📉 Results
+
+Forecasts generally capture the overall sales trend.
+
+Small dataset length limits model complexity.
+
+Output files:
+
+results/monthly_sales.png – historical sales
+
+results/train_test_plot.png – train/test split
+
+results/forecast_vs_actual.csv – numerical results
+
+🔍 Diagnostics
+
+Because the dataset slice used here had only 11 months of sales history, the standard SARIMA diagnostic routine (res.plot_diagnostics) could not be applied — it requires longer time series to validate assumptions.
+
+Instead, a custom lightweight diagnostic visualization was created and saved as:
+
+results/custom_diagnostics.png
 
 
----
+This diagnostic includes:
 
-## 📊 Methods
-- Data cleaning: removed returns, negative values, missing IDs  
-- Aggregated daily sales into **monthly revenue**  
-- Train/test split (chronological 80/20)  
-- Seasonal **SARIMAX model** with 12-month seasonality  
-- Evaluated using **MAE** and **RMSE**  
+Residuals over time (check for patterns)
 
----
+Residual histogram (check approximate normality)
 
-## 📷 Results
-### Forecast vs Actual
-![Forecast vs Actual](results/monthly_sales.png)
+Residual autocorrelation function (ACF), trimmed to the available data
 
-### Train/Test Split
-![Train/Test Split](results/train_test_plot.png)
+While limited, these diagnostics still provide a basic check on model fit. For larger datasets (e.g., multiple years or all countries), the full SARIMA diagnostics can be run without modification.
 
-### Diagnostics
-![SARIMAX Diagnostics](results/sarimax_diagnostics.png)
+🚀 Next Steps
 
----
+Extend analysis with longer sales history
 
-## ⚙️ Tools
-- Python (pandas, matplotlib, statsmodels)  
-- Jupyter Notebook  
-- GitHub for version control & portfolio  
+Compare SARIMA with Prophet, XGBoost, and LSTM
 
----
-
-## 📌 Dataset
-- UCI Machine Learning Repository — [Online Retail](https://archive.ics.uci.edu/dataset/352/online+retail)  
-- Transactions between Dec 2010–Dec 2011 for a UK-based retailer  
-- Variables: InvoiceNo, StockCode, Quantity, InvoiceDate, UnitPrice, CustomerID, Country  
-
----
-
-## 🚀 How to Run
-1. Clone the repo:  
-   ```bash
-   git clone https://github.com/<your-username>/retail-sales-forecasting.git
-   cd retail-sales-forecasting
-2. Place the dataset in data/Online Retail.xlsx
-3. Open the notebook: jupyter notebook notebooks/retail_forecasting.ipynb
-4. Run all cells to reproduce results.
-
-Built by Sage Cain (2025)
-Portfolio Project – Data Analytics & Forecasting
+Deploy forecasts in an interactive dashboard (e.g., Power BI or Streamlit)
